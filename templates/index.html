@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Doctor's Fee Predictor</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f5f5f5;
+        }
+        .container {
+            max-width: 800px;
+            margin: 20px auto;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        h1 {
+            text-align: center;
+            color: #333;
+        }
+        label {
+            font-weight: bold;
+            display: block;
+            margin-bottom: 5px;
+        }
+        input[type="text"],
+        select {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 15px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        input[type="submit"] {
+            background-color: #4caf50;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+        input[type="submit"]:hover {
+            background-color: #45a049;
+        }
+        #result {
+            margin-top: 20px;
+            padding: 20px;
+            background-color: #f0f0f0;
+            border-radius: 5px;
+        }
+        #result p {
+            margin: 0;
+            font-size: 18px;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <h1>Doctor's Fee Predictor</h1>
+    <form method="post" action="/predict">
+        <label for="exp">Experience (in years)</label>
+        <input type="text" name="exp" id="exp" placeholder="Enter experience...">
+
+        <label for="specs">Doctor's Specialization</label>
+        <select name="specsDropdown" id="specs">
+            <option value="dermatologist">Dermatologist</option>
+            <option value="neurologist">Neurologist</option>
+            <option value="gynecologist">Gynecologist</option>
+            <option value="urologist">Urologist</option>
+            <option value="gastroenterologist">Gastroenterologist</option>
+            <option value="pulmonologist">Pulmonologist</option>
+            <option value="orthopedic-surgeon">Orthopedic Surgeon</option>
+            <option value="pediatrician">Pediatrician</option>
+            <option value="general-physician">General Physician</option>
+            <option value="nephrologist">Nephrologist</option>
+            <option value="neuro-psychiatrist">Neuro Psychiatrist</option>
+            <option value="neuro-physician">Neuro Physician</option>
+            <option value="endocrinologist">Endocrinologist</option>
+            <option value="sexologist">Sexologist</option>
+            <option value="ent-specialist">ENT Specialist</option>
+            <option value="eye-surgeon">Eye Surgeon</option>
+            <option value="neuro-surgeon">Neuro Surgeon</option>
+            <option value="andrologist">Andrologist</option>
+            <option value="neonatologist">Neonatologist</option>
+            <option value="spinal-surgeon">Spinal Surgeon</option>
+            <option value="pediatric-gastroenterologist">Pediatric Gastroenterologist</option>
+            <option value="internal-medicine">Internal Medicine</option>
+            <option value="family-medicine">Family Medicine</option>
+            <option value="ent-surgeon">ENT Surgeon</option>
+            <option value="psychiatrist">Psychiatrist</option>
+            <option value="endourologist">Endourologist</option>
+            <option value="pediatric-neuro-physician">Pediatric Neuro Physician</option>
+            <option value="pediatric-nephrologist">Pediatric Nephrologist</option>
+            <option value="medical-specialist">Medical Specialist</option>
+            <option value="regenerative-medicine-specialist">Regenerative Medicine Specialist</option>
+            <option value="rheumatologist">Rheumatologist</option>
+            <option value="cardiologist">Cardiologist</option>
+        </select>
+
+        <label for="reviews">Number of Reviews by Patients</label>
+        <input type="text" name="reviews" id="reviews" placeholder="Enter number of reviews...">
+
+
+
+        <label for="sat_rate">Patient's Satisfaction Rate (%)</label>
+        <input type="text" name="sat_rate" id="sat_rate" placeholder="Enter satisfaction rate...">
+
+
+        <label for="province">Province</label>
+        <select name="provinceDropdown" id="province">
+            <option value="Punjab">Punjab</option>
+            <option value="KPK">KPK</option>
+            <option value="Sindh">Sindh</option>
+            <option value="Capital Territory">Capital Territory</option>
+            <option value="Balochistan">Balochistan</option>
+            <option value="Unknown">Unknown</option>
+        </select>
+
+        <label for="city">City</label>
+        <select name="cityDropdown" id="city">
+            <option value="QUETTA">Quetta</option>
+            <option value="ABBOTTABAD">Abbottabad</option>
+            <option value="ALIPUR">Alipur</option>
+            <option value="ATTOCK">Attock</option>
+            <option value="BADEN">Baden</option>
+            <option value="BAHAWALNAGAR">Bahawalnagar</option>
+            <option value="BAHAWALPUR">Bahawalpur</option>
+            <option value="BAJAUR-AGENCY">Bajaur Agency</option>
+            <option value="BANNU">Bannu</option>
+            <option value="BHAKKAR">Bhakkar</option>
+            <option value="BHALWAL">Bhalwal</option>
+            <option value="BUNER">Buner</option>
+            <option value="BUREWALA">Burewala</option>
+            <option value="CHAKWAL">Chakwal</option>
+            <option value="CHAMAN">Chaman</option>
+            <option value="CHARSADDA">Charsadda</option>
+            <option value="CHICHAWATNI">Chichawatni</option>
+            <option value="CHINIOT">Chiniot</option>
+            <option value="CHISHTIAN">Chishtian</option>
+            <option value="DARGAI">Dargai</option>
+            <option value="DASKA">Daska</option>
+            <option value="DERA-GHAZI-KHAN">Dera Ghazi Khan</option>
+            <option value="DERA-ISMAIL-KHAN">Dera Ismail Khan</option>
+            <option value="DIJKOT">Dijkot</option>
+            <option value="DINGA">Dinga</option>
+            <option value="DUNYAPUR">Dunyapur</option>
+            <option value="GILGIT">Gilgit</option>
+            <option value="GOJRA">Gojra</option>
+            <option value="GUJAR-KHAN">Gujar Khan</option>
+            <option value="GUJRAT">Gujrat</option>
+            <option value="HAFIZABAD">Hafizabad</option>
+            <option value="HANGU">Hangu</option>
+            <option value="HARIPUR">Haripur</option>
+            <option value="HYDERABAD">Hyderabad</option>
+            <option value="ISTANBUL">Istanbul</option>
+            <option value="IZMIR">Izmir</option>
+            <option value="JACOBABAD">Jacobabad</option>
+            <option value="JAMSHORO">Jamshoro</option>
+            <option value="JARANWALA">Jaranwala</option>
+            <option value="JAUHARABAD">Jauharabad</option>
+            <option value="JHANG">Jhang</option>
+            <option value="JHELUM">Jhelum</option>
+            <option value="KABIRWALA">Kabirwala</option>
+            <option value="KAMOKE">Kamoke</option>
+            <option value="KANDIARO">Kandiaro</option>
+            <option value="KASHMOR">Kashmor</option>
+            <option value="KASUR">Kasur</option>
+            <option value="KHAIRPUR">Khairpur</option>
+            <option value="KHANEWAL">Khanewal</option>
+            <option value="KHANPUR">Khanpur</option>
+            <option value="KHARIAN">Kharian</option>
+            <option value="KHUSHAB">Khushab</option>
+            <option value="KHUZDAR">Khuzdar</option>
+            <option value="KOHAT">Kohat</option>
+            <option value="KOT-ADDU">Kot Addu</option>
+            <option value="KOTLI">Kotli</option>
+            <option value="LALAMUSA">Lalamusa</option>
+            <option value="LARKANA">Larkana</option>
+            <option value="LAYYAH">Layyah</option>
+            <option value="LODHRAN">Lodhran</option>
+            <option value="LORALAI">Loralai</option>
+            <option value="MALAKAND">Malakand</option>
+            <option value="MANDI-BAHAUDDIN">Mandi Bahauddin</option>
+            <option value="MANSEHRA">Mansehra</option>
+            <option value="MARDAN">Mardan</option>
+            <option value="MATIARI">Matiari</option>
+            <option value="MIAN-CHANNU">Mian Channu</option>
+            <option value="MIANWALI">Mianwali</option>
+            <option value="MIRPUR">Mirpur</option>
+            <option value="MIRPUR-KHAS">Mirpur Khas</option>
+            <option value="MITHI">Mithi</option>
+            <option value="MURIDKE">Muridke</option>
+            <option value="MUZAFFAR-GARH">Muzaffar Garh</option>
+            <option value="NANKANA-SAHIB">Nankana Sahib</option>
+            <option value="NAROWAL">Narowal</option>
+            <option value="NAWABSHAH">Nawabshah</option>
+            <option value="NOWSHERA">Nowshera</option>
+            <option value="OKARA">Okara</option>
+            <option value="PAKPATTAN">Pakpattan</option>
+            <option value="PASRUR">Pasrur</option>
+            <option value="PATTOKI">Pattoki</option>
+            <option value="RAHIM-YAR-KHAN">Rahim Yar Khan</option>
+            <option value="RAJAN-PUR">Rajanpur</option>
+            <option value="RAWALAKOT">Rawalakot</option>
+            <option value="RENALA-KHURD">Renala Khurd</option>
+            <option value="RIYADH">Riyadh</option>
+            <option value="SADIQABAD">Sadiqabad</option>
+            <option value="SAHIWAL">Sahiwal</option>
+            <option value="SAMUNDRI">Samundri</option>
+            <option value="SHAHDADPUR">Shahdadpur</option>
+            <option value="SHAHKOT">Shahkot</option>
+            <option value="SHEIKHUPURA">Sheikhupura</option>
+            <option value="SHORKOT">Shorkot</option>
+            <option value="SKARDU">Skardu</option>
+            <option value="SUKKUR">Sukkur</option>
+            <option value="SWABI">Swabi</option>
+            <option value="SWAT">Swat</option>
+            <option value="TALAGANG">Talagang</option>
+            <option value="TANDO-MUHAMMAD-KHAN">Tando Muhammad Khan</option>
+            <option value="TAXILA">Taxila</option>
+            <option value="THATTA">Thatta</option>
+            <option value="TIMERGARA">Timergara</option>
+            <option value="TOBA-TEK-SINGH">Toba Tek Singh</option>
+            <option value="TURBAT">Turbat</option>
+            <option value="UMARKOT">Umarkot</option>
+            <option value="VEHARI">Vehari</option>
+            <option value="WAH-CANTT">Wah Cantt</option>
+            <option value="WAZIRABAD">Wazirabad</option>
+            <option value="LAHORE">Lahore</option>
+            <option value="MULTAN">Multan</option>
+            <option value="PESHAWAR">Peshawar</option>
+            <option value="SIALKOT">Sialkot</option>
+            <option value="GUJRANWALA">Gujranwala</option>
+            <option value="SARGODHA">Sargodha</option>
+            <option value="FAISALABAD">Faisalabad</option>
+            <option value="ISLAMABAD">Islamabad</option>
+            <option value="KARACHI">Karachi</option>
+        </select>
+
+        <label for="avg_time">Average Time to Patients (Minutes)</label>
+        <input type="text" name="avg_time" id="avg_time" placeholder="Enter average time...">
+
+        <label for="wait_time">Wait Time (minutes)</label>
+        <input type="text" name="wait_time" id="wait_time" placeholder="Enter wait time...">
+
+        <input type="submit" value="Predict">
+    </form>
+
+    <div id="result">
+        <h2>Prediction Result</h2>
+        <p id="prediction_result">Your predicted fee will be displayed here.</p>
+        <p><strong>Note:</strong> Please ensure all input fields are filled correctly.</p>
+    </div>
+</div>
+
+<!-- JavaScript code to update prediction result -->
+<script>
+    const form = document.querySelector('form');
+    form.addEventListener('submit', async function (event) {
+        event.preventDefault();
+
+        const formData = new FormData(form);
+        const response = await fetch('/predict', {
+            method: 'POST',
+            body: formData
+        });
+
+        const result = await response.text();
+        document.getElementById('prediction_result').textContent = `Predicted fee(PKR): ${result}`;
+    });
+</script>
+
+</body>
+</html>
